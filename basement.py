@@ -1,19 +1,42 @@
+# Fast i Källaren - Textbaserat äventyrsspel
 import random
 
-print("Du vaknar upp i en okänd mörk plats...")
-input("...")
+def main():
+    print("Du vaknar upp i ett mörkt och kallt rum")
+    print("Du är fast bunden i kedja till en stång")
+    print()
 
-print("Du är yr och vet inte vart du är...")
-input("...")
+    while True:
+        print("Vad vill du göra?")
+        print("1. Letar i rummet")
+        print("2. Använd föremålet för att försöka fly")
+        print("3. Smyg dig ut försiktigt")
+        print("4. Ge upp")
 
-print("Du ser en dörr som är låst. Vad vill du göra?")
-choice = input("(1. Försök bryta kedjan, 2. Leta i rummet): ")
+        choice = input("Ange ditt val (1-4): ")
 
-if choice == "1":
-    print("Du försöker bryta kedjan, men den är för stark. Du lyckas inte.")
-    print("Vad gör du nu?")
-    choice2 = input("(1. Leta i rummet, 2. Smyg dig ut försiktigt): ")
+        if choice == "1":
+            print("Letar i rummet...")
+            print("Lyckas hitta ett föremål som kan användas för att fly!")
+        elif choice == "2":
+            print("Använder föremålet för att försöka fly...")
+            print("Fortsätter leta...")
+        elif choice == "3":
+            print("Smyger dig ut försiktigt...")
+            print("Smyger dig ut")
+            print("Spring ut direkt")
+            print("Hör ljud")
+            print("Hittar föremål för att fly")
+            print("Känsla av panik")
+            print("Hon kan komma tillbaka när som helst")
+            print("Du är ute, men hör hennes röst i fjärran")
+            print("Vad ska du göra nu...?")
+            break
+        elif choice == "4":
+            print("Du ger upp och förblir fast i källaren.")
+            break
+        else:
+            print("Ogiltigt val. Försök igen.")
 
-if choice2 == "1":
-        print("Du letar i rummet och hittar ett föremål som kan hjälpa dig att fly.")
-        print("Du använder föremålet för att försöka fly.")
+if __name__ == "__main__":
+    main()
