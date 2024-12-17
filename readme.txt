@@ -1,8 +1,26 @@
-Beskrivning
-I detta textbaserade äventyrsspel är du fast i en källare och försöker bryta dig fri. Du måste navigera genom olika utmaningar och hinder för att hitta ett sätt att fly.
+Basement
+===========
 
-Spelinstruktioner
-Följ instruktionerna i koden för att interagera med spelet. Skriv in numret för det alternativ du vill välja och tryck Enter för att fortsätta.
+I detta textbaserade äventyrsspel är du fast i en källare och försöker bryta dig fri. 
+Du måste navigera genom olika utmaningar och hinder för att hitta ett sätt att fly.
 
-Mål
-Målet är att hitta ett sätt att bryta dig fri från källaren och fly till frihet. Utforska rummet, använd föremål och gör kloka val för att undvika faror och hinder på din väg.
+Hur man spelar
+==============
+Skriv in numret för det alternativ du vill välja och tryck Enter för att fortsätta.
+Som exempel:
+
+1. Sök
+
+2. Gå runt
+
+3. Försök bryta ur
+
+4. Sätt dig ner och gråt
+
+
+Målet är att hitta ett sätt att bryta dig fri från källaren och fly till frihet. 
+Utforska rummet, använd föremål och gör kloka val för att undvika faror och hinder på din väg.
+
+Avsluta spel
+=============
+Med "Quit" kan du avsluta spelet om du inte orkar spela längre.
