@@ -1,4 +1,3 @@
-# Fast i Källaren - Textbaserat äventyrsspel
 import random
 
 class Room:
@@ -19,7 +18,8 @@ def show_main_menu():
     print("\nHuvudmeny")
     print("1. Starta spelet")
     print("2. Välj svårighetsgrad")
-    print("3. Avsluta spelet")
+    print("3. Läs Instruktioner")
+    print("4. Avsluta spelet")
 
 def show_difficulty_menu():
     print("\nVälj svårighetsgrad")
@@ -27,10 +27,19 @@ def show_difficulty_menu():
     print("2. Medel")
     print("3. Svår")
 
+def read_readme():
+    try:
+        with open("readme.txt", "r", encoding="utf-8") as file:
+            content = file.read()
+            print("\nInnehåll i readme.txt:\n")
+            print(content)
+    except FileNotFoundError:
+        print("Filen readme.txt hittades inte.")
+
 def main():
     while True:
         show_main_menu()
-        choice = input("Ange ditt val (1-3): ")
+        choice = input("Ange ditt val (1-4): ")
 
         if choice == "1":
             start_game()
@@ -39,6 +48,8 @@ def main():
             difficulty_choice = input("Ange svårighetsgrad (1-3): ")
             set_difficulty(difficulty_choice)
         elif choice == "3":
+            read_readme()
+        elif choice == "4":
             print("Spelet avslutas.")
             break
         else:
@@ -67,13 +78,14 @@ def start_game():
 
     while True:
         print(rooms[current_room].description)
-        print("Vad vill du göra?")
+        print("\nVad vill du göra?")
         print("1. Letar i rummet")
         print("2. Använd föremålet för att försöka fly")
         print("3. Smyg dig ut försiktigt")
-        print("4. Ge upp")
+        print("4. Visa inventariet")
+        print("5. Ge upp")
 
-        choice = input("Ange ditt val (1-4): ")
+        choice = input("Ange ditt val (1-5): ")
 
         if choice == "1":
             item = rooms[current_room].search()
@@ -92,6 +104,10 @@ def start_game():
             else:
                 print("Det finns inga fler rum att smyga till.")
         elif choice == "4":
+            print("Ditt inventarie innehåller:")
+            for item in inventory:
+                print(f"- {item}")
+        elif choice == "5":
             print("Du ger upp och förblir fast i källaren.")
             break
         else:

@@ -15,7 +15,9 @@ Som exempel:
 
 3. Försök bryta ur
 
-4. Sätt dig ner och gråt
+4. Visa inventariet
+
+5. Sätt dig ner och gråt
 
 
 Målet är att hitta ett sätt att bryta dig fri från källaren och fly till frihet. 
@@ -23,4 +25,4 @@ Utforska rummet, använd föremål och gör kloka val för att undvika faror och
 
 Avsluta spel
 =============
-Med "Quit" kan du avsluta spelet om du inte orkar spela längre.
+Med "Avsluta spelet" kan du avsluta spelet om du inte orkar spela längre.
