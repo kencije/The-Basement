@@ -1,10 +1,12 @@
 import random
 
+# Klass för att representera ett rum
 class Room:
     def __init__(self, description, items):
         self.description = description
         self.items = items
 
+    # Metod för att söka i rummet efter föremål
     def search(self):
         if self.items:
             item = self.items.pop()
@@ -14,6 +16,7 @@ class Room:
             print("Du hittar inget av värde.")
             return None
 
+# Funktion för att visa huvudmenyn
 def show_main_menu():
     print("\nHuvudmeny")
     print("1. Starta spelet")
@@ -21,12 +24,14 @@ def show_main_menu():
     print("3. Läs Instruktioner")
     print("4. Avsluta spelet")
 
+# Funktion för att visa menyn för att välja svårighetsgrad
 def show_difficulty_menu():
     print("\nVälj svårighetsgrad")
     print("1. Lätt")
     print("2. Medel")
     print("3. Svår")
 
+# Funktion för att läsa innehållet i readme.txt
 def read_readme():
     try:
         with open("readme.txt", "r", encoding="utf-8") as file:
@@ -36,8 +41,9 @@ def read_readme():
     except FileNotFoundError:
         print("Filen readme.txt hittades inte.")
 
+# Huvudfunktion för spelet
 def main():
-    difficulty = "Medel"
+    difficulty = "Medel"  # Standard svårighetsgrad
 
     while True:
         show_main_menu()
@@ -57,6 +63,7 @@ def main():
         else:
             print("Ogiltigt val. Försök igen.")
 
+# Funktion för att sätta svårighetsgraden
 def set_difficulty(choice):
     if choice == "1":
         print("Svårighetsgrad satt till Lätt.")
@@ -71,6 +78,7 @@ def set_difficulty(choice):
         print("Ogiltigt val. Svårighetsgrad satt till Medel som standard.")
         return "Medel"
 
+# Funktion för att starta spelet
 def start_game(difficulty):
     rooms = [
         Room("\nDu vaknar upp i ett mörkt och kallt rum. Du är fast bunden i kedja till en stång.", ["en nyckel"]),
@@ -83,7 +91,7 @@ def start_game(difficulty):
 
     current_room = 0
     inventory = []
-    key_room = random.randint(0, len(rooms) - 1)
+    key_room = random.randint(0, len(rooms) - 1)  # Slumpmässigt rum för att använda nyckeln
     player_hp = 100
     debuff = False
 
@@ -103,18 +111,18 @@ def start_game(difficulty):
             if item:
                 inventory.append(item)
         elif choice == "2":
-            if "en nyckel" in inventory and current_room == key_room:
+            if "en nyckel" i inventory och current_room == key_room:
                 print("Du använder nyckeln för att låsa upp dörren och fly!")
                 break
-            elif "en kniv" in inventory:
+            elif "en kniv" i inventory:
                 print("Du använder kniven för att försvara dig!")
                 player_hp = combat(inventory, player_hp, debuff)
             else:
                 print("Du har inget användbart föremål för att fly.")
         elif choice == "3":
-            if "en ficklampa" in inventory:
+            if "en ficklampa" i inventory:
                 print("Ficklampan gör det lättare att se, men du kan bli upptäckt lättare.")
-                if random.random() < 0.5:
+                if random.random() < 0.5:  # 50% chans att bli upptäckt
                     print("Du blev upptäckt!")
                     player_hp = combat(inventory, player_hp, debuff)
                 else:
@@ -139,19 +147,20 @@ def start_game(difficulty):
         else:
             print("Ogiltigt val. Försök igen.")
 
-        
-        if random.random() < 0.1:
+        # Slumpmässig chans att snubbla och larma kidnapparen
+        if random.random() < 0.1:  # 10% chans att snubbla
             print("Du snubblar och gör ett ljud!")
-            if random.random() < 0.5:
+            if random.random() < 0.5:  # 50% chans att larma kidnapparen
                 print("Kidnapparen hörde dig!")
                 player_hp = combat(inventory, player_hp, debuff)
             else:
                 print("Du lyckades återhämta dig utan att bli upptäckt.")
-            debuff = True
+            debuff = True  # Tillämpa debuff
 
+# Funktion för stridssystemet
 def combat(inventory, player_hp, debuff):
     kidnapper_hp = 100
-    while player_hp > 0 and kidnapper_hp > 0:
+    while player_hp > 0 och kidnapper_hp > 0:
         print("\nDu är i strid!")
         print(f"Din HP: {player_hp}")
         print(f"Kidnapparens HP: {kidnapper_hp}")
@@ -166,50 +175,51 @@ def combat(inventory, player_hp, debuff):
 
         if choice == "1":
             print("Du försöker blockera!")
-            if random.random() < 0.6:
+            if random.random() < 0.6:  # 60% chans att lyckas blockera
                 print("Du lyckades blockera attacken!")
             else:
                 print("Du misslyckades med att blockera!")
                 player_hp -= 10
         elif choice == "2":
             print("Du försöker boxa!")
-            if random.random() < 0.5:
+            if random.random() < 0.5:  # 50% chans att lyckas boxa
                 print("Du träffade!")
                 kidnapper_hp -= 10
             else:
                 print("Du missade!")
         elif choice == "3":
             print("Du försöker sparka!")
-            if random.random() < 0.4:
+            if random.random() < 0.4:  # 40% chans att lyckas sparka
                 print("Du träffade med en spark!")
                 kidnapper_hp -= 20
             else:
                 print("Du missade!")
         elif choice == "4":
             print("Du försöker skallning!")
-            if random.random() < 0.1:
+            if random.random() < 0.1:  # 10% chans att lyckas med skallning
                 print("Du träffade med en skallning!")
                 kidnapper_hp -= 50
-                if random.random() < 0.5:
+                if random.random() < 0.5:  # 50% chans att slå ut kidnapparen
                     print("Kidnapparen blev medvetslös!")
                     break
             else:
                 print("Du missade!")
         elif choice == "5":
             print("Du försöker fly!")
-            if random.random() < 0.5:
+            if random.random() < 0.5:  # 50% chans att lyckas fly
                 print("Du lyckades fly!")
                 break
             else:
                 print("Du snubblade och föll!")
                 player_hp -= 10
-                debuff = True
+                debuff = True  # Tillämpa debuff
         else:
             print("Ogiltigt val. Försök igen.")
 
+        # Kidnapparen attackerar om inte utslagen
         if kidnapper_hp > 0:
             print("Kidnapparen attackerar!")
-            if random.random() < 0.5:
+            if random.random() < 0.5:  # 50% chans att träffa
                 print("Kidnapparen träffade dig!")
                 player_hp -= 10
             else:
