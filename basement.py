@@ -84,6 +84,7 @@ def start_game(difficulty):
     current_room = 0
     inventory = []
     key_room = random.randint(0, len(rooms) - 1)
+    player_hp = 100
     debuff = False
 
     while True:
@@ -107,7 +108,7 @@ def start_game(difficulty):
                 break
             elif "en kniv" in inventory:
                 print("Du använder kniven för att försvara dig!")
-                combat(inventory, debuff)
+                player_hp = combat(inventory, player_hp, debuff)
             else:
                 print("Du har inget användbart föremål för att fly.")
         elif choice == "3":
@@ -115,7 +116,7 @@ def start_game(difficulty):
                 print("Ficklampan gör det lättare att se, men du kan bli upptäckt lättare.")
                 if random.random() < 0.5:
                     print("Du blev upptäckt!")
-                    combat(inventory, debuff)
+                    player_hp = combat(inventory, player_hp, debuff)
                 else:
                     print("Du smyger dig till nästa rum.")
                     if current_room < len(rooms) - 1:
@@ -138,51 +139,88 @@ def start_game(difficulty):
         else:
             print("Ogiltigt val. Försök igen.")
 
+        
         if random.random() < 0.1:
             print("Du snubblar och gör ett ljud!")
             if random.random() < 0.5:
                 print("Kidnapparen hörde dig!")
-                combat(inventory, debuff)
+                player_hp = combat(inventory, player_hp, debuff)
             else:
                 print("Du lyckades återhämta dig utan att bli upptäckt.")
             debuff = True
 
-def combat(inventory, debuff):
-    print("Du är i strid!")
-    while True:
+def combat(inventory, player_hp, debuff):
+    kidnapper_hp = 100
+    while player_hp > 0 and kidnapper_hp > 0:
+        print("\nDu är i strid!")
+        print(f"Din HP: {player_hp}")
+        print(f"Kidnapparens HP: {kidnapper_hp}")
         print("\nVad vill du göra?")
-        print("1. Attackera")
-        print("2. Försvara")
-        print("3. Försök att fly")
+        print("1. Blockera")
+        print("2. Boxa")
+        print("3. Sparka")
+        print("4. Skallning")
+        print("5. Försök att fly")
 
-        choice = input("Ange ditt val (1-3): ")
+        choice = input("Ange ditt val (1-5): ")
 
         if choice == "1":
-            if "en kniv" in inventory:
-                print("Du attackerar med kniven!")
-                if random.random() < 0.7:
-                    print("Du vann striden!")
-                    break
-                else:
-                    print("Du misslyckades med att attackera!")
+            print("Du försöker blockera!")
+            if random.random() < 0.6:
+                print("Du lyckades blockera attacken!")
             else:
-                print("Du har inget vapen att attackera med!")
+                print("Du misslyckades med att blockera!")
+                player_hp -= 10
         elif choice == "2":
-            print("Du försvarar dig!")
+            print("Du försöker boxa!")
             if random.random() < 0.5:
-                print("Du lyckades försvara dig!")
+                print("Du träffade!")
+                kidnapper_hp -= 10
             else:
-                print("Du misslyckades med att försvara dig!")
+                print("Du missade!")
         elif choice == "3":
+            print("Du försöker sparka!")
+            if random.random() < 0.4:
+                print("Du träffade med en spark!")
+                kidnapper_hp -= 20
+            else:
+                print("Du missade!")
+        elif choice == "4":
+            print("Du försöker skallning!")
+            if random.random() < 0.1:
+                print("Du träffade med en skallning!")
+                kidnapper_hp -= 50
+                if random.random() < 0.5:
+                    print("Kidnapparen blev medvetslös!")
+                    break
+            else:
+                print("Du missade!")
+        elif choice == "5":
             print("Du försöker fly!")
             if random.random() < 0.5:
                 print("Du lyckades fly!")
                 break
             else:
                 print("Du snubblade och föll!")
+                player_hp -= 10
                 debuff = True
         else:
             print("Ogiltigt val. Försök igen.")
+
+        if kidnapper_hp > 0:
+            print("Kidnapparen attackerar!")
+            if random.random() < 0.5:
+                print("Kidnapparen träffade dig!")
+                player_hp -= 10
+            else:
+                print("Kidnapparen missade!")
+
+    if player_hp <= 0:
+        print("Du förlorade striden och blev fångad igen.")
+    elif kidnapper_hp <= 0:
+        print("Du besegrade kidnapparen!")
+
+    return player_hp
 
 if __name__ == "__main__":
     main()
