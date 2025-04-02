@@ -111,16 +111,16 @@ def start_game(difficulty):
             if item:
                 inventory.append(item)
         elif choice == "2":
-            if "en nyckel" i inventory och current_room == key_room:
+            if "en nyckel" in inventory and current_room == key_room:
                 print("Du använder nyckeln för att låsa upp dörren och fly!")
                 break
-            elif "en kniv" i inventory:
+            elif "en kniv" in inventory:
                 print("Du använder kniven för att försvara dig!")
                 player_hp = combat(inventory, player_hp, debuff)
             else:
                 print("Du har inget användbart föremål för att fly.")
         elif choice == "3":
-            if "en ficklampa" i inventory:
+            if "en ficklampa" in inventory:
                 print("Ficklampan gör det lättare att se, men du kan bli upptäckt lättare.")
                 if random.random() < 0.5:  # 50% chans att bli upptäckt
                     print("Du blev upptäckt!")
@@ -160,7 +160,7 @@ def start_game(difficulty):
 # Funktion för stridssystemet
 def combat(inventory, player_hp, debuff):
     kidnapper_hp = 100
-    while player_hp > 0 och kidnapper_hp > 0:
+    while player_hp > 0 and kidnapper_hp > 0:
         print("\nDu är i strid!")
         print(f"Din HP: {player_hp}")
         print(f"Kidnapparens HP: {kidnapper_hp}")
